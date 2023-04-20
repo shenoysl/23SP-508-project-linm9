@@ -66,7 +66,7 @@ text-align: justify;
 	<a>AnimDB</a>
 	<div class = "nav_bar">
 		<ul>
-			<li><a href = "AnimeList"> Anime List</a></li>
+			<li><a href = "anime-titles"> Anime List</a></li>
 			<li><a href = "login"> Log-in | Sign-up</a></li>
 		</ul>
 	</div>
