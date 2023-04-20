@@ -7,9 +7,10 @@ function listAnimes()
 {
     global $conn;
     
-    $sqlQuery = "SELECT anime_name as 'Title', AVG(rating) as 'Average Rating'
-FROM animes join rates_reviews using (anime_id)
-GROUP BY anime_name)";
+    $sqlQuery = "SELECT Anime_name as 'Title', 
+                        AVG(rating) as 'Average Rating'
+                        FROM animes join rates_reviews using (Anime_id)
+                        GROUP BY Anime_name";
     
     $stmt = $conn->prepare($sqlQuery);
     $stmt->execute();
@@ -22,7 +23,7 @@ GROUP BY anime_name)";
         $dataRow = array();
         
         $dataRow[] = $sqlRow['Title'];
-        $dataRow[] = $sqlRow['Average Rating'];      
+        $dataRow[] = $sqlRow['Average Rating'];
         $dataTable[] = $dataRow;
     }
     
@@ -35,6 +36,10 @@ GROUP BY anime_name)";
     echo json_encode($output);
 }
 
+
+if(!empty($_POST['action']) && $_POST['action'] == 'listAnimes') {
+    listAnimes();
+}
 
 if(!empty($_POST['action']) && $_POST['action'] == 'listAnimes') {
     listAnimes();
