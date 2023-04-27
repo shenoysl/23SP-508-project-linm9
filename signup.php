@@ -4,7 +4,9 @@
 <?php require_once('header.php'); ?>
 </head>
 
-<?php require_once('connection.php'); ?>
+<?php
+
+require_once('connection.php'); ?>
 <style>
 body{
 background-image: url('photos/background2.jpg');

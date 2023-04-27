@@ -4,6 +4,9 @@
 <?php require_once('header.php'); ?>
 </head>
 
+<?php require_once('loginconnection.php');
+?>
+
 <style>
 header {
 height: 100px;
@@ -61,11 +64,12 @@ text-align: justify;
 <body>
 <header>
 <div class = "logoName">
-	<a>AnimDB</a>
+	<a>Welcome <span><?php echo $_SESSION['Username']?></span></a>
 	<div class = "nav_bar">
 		<ul>
 			<li><a href = "anime-titles"> Anime List</a></li>
-			<li><a href = "login"> Log-in | Sign-up</a></li>
+			<li><a href = "MyAnimeList"> My AnimeList</a></li>
+			<li><a href = "logout"> Log Out</li></a>
 		</ul>
 	</div>
 </div>

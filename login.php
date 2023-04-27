@@ -2,8 +2,10 @@
 <head>
 <title>login/signup</title>
 <?php require_once('header.php'); ?>
+
 </head>
-<?php require_once('connection.php'); ?>
+<?php require_once('loginconnection.php');
+?>
 <style>
 body{
 background-image: url('photos/background.jpg');
@@ -81,15 +83,15 @@ cursor: pointer;
 				<div class="col-4">
 					<p class="sign" align="center">Sign in</p>
 					<div class="form-group">
-						<input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" required>
+						<input type="text" class="form-control" id="Email" placeholder="Enter Email" name="Email" required>
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control" id="password" placeholder="Enter Password" name="password" required>
+						<input type="text" class="form-control" id="password" placeholder="Enter Password" name="password" required>
 					</div>
 					<br><div class = "wrapper">
-					<button type="submit" class="log-in">Log in</button>
+					<button type="submit" name = "submit" class="log-in">Log in</button>
 					<b> OR </b>
-					<a href = "signup" class = "signup">Sign Up</a></div><br/>
+					<a type = "signup" class = "signup">Sign Up</a></div><br/>
 				</div>
 			</div>
 		</form>

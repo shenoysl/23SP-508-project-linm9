@@ -8,7 +8,7 @@ ini_set('display_errors', 1);
 $servername = "cmsc508.com";
 $username = "23SP_linm9";
 $password = "23SP_linm9";
-$database = "23SP_linm9_hr";
+$database = "23SP_linm9_pr";
 
 try {
     // Establish a connection with the MySQL server
@@ -17,3 +17,4 @@ try {
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
+?>

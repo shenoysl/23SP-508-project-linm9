@@ -8,9 +8,10 @@ function listAnimes()
     global $conn;
     
     $sqlQuery = "SELECT Anime_name as 'Title', 
-                        AVG(rating) as 'Average Rating'
-                        FROM animes join rates_reviews using (Anime_id)
-                        GROUP BY Anime_name";
+                        IFNULL(ROUND(AVG(rating),2), 'No Ratings Yet') as 'Average Rating'
+                        FROM animes left join rates_reviews using (Anime_id)
+                        GROUP BY Anime_name
+                        ORDER BY AVG(rating) DESC";
     
     $stmt = $conn->prepare($sqlQuery);
     $stmt->execute();
@@ -41,8 +42,3 @@ if(!empty($_POST['action']) && $_POST['action'] == 'listAnimes') {
     listAnimes();
 }
 
-if(!empty($_POST['action']) && $_POST['action'] == 'listAnimes') {
-    listAnimes();
-}
-
-?>
