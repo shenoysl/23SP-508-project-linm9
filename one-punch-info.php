@@ -1,3 +1,4 @@
+<html>
 <?php
 
 require_once('connection.php');
@@ -16,39 +17,91 @@ WHERE anime_id = 'OPM'");
 
 $stmt2->execute();
 
+$stmt3 = $conn->prepare("SELECT character_voiced as 'Character', CONCAT(first_name, ' ', last_name) as 'Voice_Actor', Birthdate
+FROM voice_actors join stars using (voice_actor_id) join animes using (anime_id)
+WHERE anime_id = 'OPM'");
+
+$stmt3->execute();
+
+$stmt4 = $conn->prepare("SELECT CONCAT(first_name, ' ', last_name) as 'Name', IFNULL(Birthdate, 'Unknown') as 'Birthdate'
+FROM producers join produced using (producer_id) join animes using (anime_id)
+WHERE anime_id = 'OPM'");
+
+$stmt4->execute();
+
+
 ?>
 
 <style>
+body{
+background-color: #757C88;
+
+}
 h4 {
   font-family: papyrus, fantasy;
-    font-size: 30px;
+    font-size: 40px;    
 }
 
 h5 {
   font-family: papyrus, fantasy;
     font-size: 25px;
 }
+
+table {
+border: 2px solid orange; 
+padding: 5px; 
+width: 76%;
+text-align: center;
+color: #000;
+}
+
+.awards {
+border: 2px solid orange; 
+padding: 5px; 
+width: 30%;
+text-align: left;
+color: #000;
+}
+
+.voiceactors{
+
+border: 2px solid orange; 
+padding: 5px; 
+width: 90%;
+text-align: left;
+color: #000;
+
+}
+
+.producers{
+
+border: 2px solid orange; 
+padding: 5px; 
+width: 50%;
+text-align: left;
+color: #000;
+
+}
+
+
+
+.spacing {
+width: 80%;
+}
 </style>
 
-<body>
-<div class="container-fluid mt-3 mb-3">
-	<h4>One Punch Man</h4>
-<table style='border: 2px solid orange; padding: 10px; content: 15px;'>
-<thead>
-	<tr>
-    	<th>Release_Year</th>
-    	<th>Storyline</th>
-    	<th>Genres</th>
-    	<th>Studios</th>
-	</tr>
-	</thead>
-	<tbody>
-</div>
-</body>
-</html>
-
-
-
+<table>
+	<div class="container-fluid mt-3 mb-3">
+		<h4>One Punch Man</h4>
+		<body>
+			<tr>
+    			<th>Release_Year</th>
+    			<th>Storyline</th>
+    			<th>Genres</th>
+    			<th>Studios</th>
+			</tr>
+		</body>
+	</div>
 
 <?php 
 while ($row = $stmt->fetch()) {
@@ -59,27 +112,21 @@ while ($row = $stmt->fetch()) {
             <td>$row[Studios]</td>   
           </tr>";
 }
-
 ?>
-
-</tbody>
 </table>
 
-<body>
-<div class="container-fluid mt-3 mb-3">
-	<h5>Awards</h5>
 
-<table style='border: solid 2px orange;'>
-<thead>
-	<tr>
-    	<th>Name</th>
-    	<th>Year</th>
-	</tr>
-	</thead>
-	<tbody>
-</div>
-</body>
-</html>
+<table class = "awards">
+	<div class="container-fluid mt-3 mb-3">
+		<h5>Awards</h5>
+		<body>
+			<tr>
+    			<th class = "spacing">Name</th>
+    			<th>Year</th>
+			</tr>
+		</body>
+	</div>
+	
 <?php 
 while ($row = $stmt2->fetch()) {
     echo "<tr>
@@ -89,9 +136,58 @@ while ($row = $stmt2->fetch()) {
 } 
 
 ?>
-
-</tbody>
 </table>
 
-<li><a href="one-punch-producers.php">Producers</a></li>
-<li><a href="one-punch-voice-actors.php">Voice Actors</a></li>
+
+<table class = "voiceactors">
+	<div class="container-fluid mt-3 mb-3">
+		<h5>Voice Actors</h5>
+		<body>
+			<tr>
+    			<th class = "spacing">Character</th>
+    			<th>Voice Actor</th>
+    			<th>Birthdate</th>
+			</tr>
+		</body>
+	</div>
+	
+<?php 
+while ($row = $stmt3->fetch()) {
+    echo "<tr>
+             <td>$row[Character]</td>
+             <td>$row[Voice_Actor]</td>
+             <td>$row[Birthdate]</td>
+          </tr>";
+} 
+
+?>
+</table>
+
+
+<table class = "producers">
+	<div class="container-fluid mt-3 mb-3">
+		<h5>Producers</h5>
+		<body>
+			<tr>
+    			<th class = "spacing">Name</th>
+    			<th>Birthdate</th>
+			</tr>
+		</body>
+	</div>
+	
+<?php 
+while ($row = $stmt4->fetch()) {
+    echo "<tr>
+             <td>$row[Name]</td>
+             <td>$row[Birthdate]</td>
+          </tr>";
+} 
+
+?>
+</table>
+
+
+
+<li><a href="anime-titles.php">Go Back</a></li>
+<li><a href="index.php">Go Home</a></li>
+</html>

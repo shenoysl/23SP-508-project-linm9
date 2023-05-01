@@ -5,8 +5,29 @@
 </head>
 
 <?php
+require_once ('connection.php');
 
-require_once('connection.php'); ?>
+// Create new account and redirect to login
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Check that passwords match
+    // TODO check whether email ALREADY exists
+    if($_POST['Password'] == $_POST['RePassword']) {
+        //INSERT INTO users table new user
+        $stmt = $conn->prepare("INSERT INTO users (Email, Username, Password) VALUES (:Email, :Username, :Password)");
+        $stmt->bindValue(':Email', $_POST['Email']);
+        $stmt->bindValue(':Username', $_POST['Username']);
+        $stmt->bindValue(':Password', $_POST['Password']);
+        $stmt->execute();
+        
+        //Go to login page to test out new sign in
+        header("Location: login.php");
+    }
+    else {
+        echo "Passwords do not match";
+    }
+}
+
+?>
 <style>
 body{
 background-image: url('photos/background2.jpg');
@@ -76,6 +97,9 @@ cursor: pointer;
 					</div>
 					<div class="form-group">
 						<input type="text" class="form-control" id="Password" placeholder="Password" name="Password" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="RePassword" placeholder="Re-Enter Password" name="RePassword" required>
 					</div>
 					<br><div class = "wrapper">
 					<button type="submit" class="signup">Sign-Up</button></div>
