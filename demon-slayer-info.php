@@ -29,6 +29,13 @@ WHERE anime_id = 'DSL'");
 
 $stmt4->execute();
 
+$stmt5 = $conn->prepare("SELECT CONCAT(first_name, ' ', last_name) as 'Actor', Name, Year
+FROM voice_actors join stars using (voice_actor_id) join animes using (anime_id) join actor_awarded using (voice_actor_id) join actor_award using (actor_award_id)
+WHERE anime_id = 'DSL'");
+
+$stmt5->execute();
+
+
 
 ?>
 
@@ -83,6 +90,16 @@ color: #000;
 
 }
 
+.actorawards{
+
+border: 2px solid orange; 
+padding: 5px; 
+width: 65%;
+text-align: left;
+color: #000;
+
+}
+
 
 
 .spacing {
@@ -118,7 +135,7 @@ while ($row = $stmt->fetch()) {
 
 <table class = "awards">
 	<div class="container-fluid mt-3 mb-3">
-		<h5>Awards</h5>
+		<h5>Anime Awards</h5>
 		<body>
 			<tr>
     			<th class = "spacing">Name</th>
@@ -162,6 +179,32 @@ while ($row = $stmt3->fetch()) {
 
 ?>
 </table>
+
+
+<table class = "actorawards">
+	<div class="container-fluid mt-3 mb-3">
+		<h5>Voice Actor Awards</h5>
+		<body>
+			<tr>
+    			<th class = "spacing">Voice Actor</th>
+    			<th>Award</th>
+    			<th>Year</th>
+			</tr>
+		</body>
+	</div>
+	
+<?php 
+while ($row = $stmt5->fetch()) {
+    echo "<tr>
+             <td>$row[Actor]</td>
+             <td>$row[Name]</td>
+            <td>$row[Year]</td>
+          </tr>";
+} 
+
+?>
+</table>
+
 
 
 <table class = "producers">
