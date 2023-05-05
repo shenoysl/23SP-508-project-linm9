@@ -17,7 +17,7 @@ try {
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
-// Start or resume session variables
+
 session_start();
 
 // If the username session is not set, then the user has not logged in yet

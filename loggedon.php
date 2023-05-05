@@ -4,7 +4,8 @@
 <?php require_once('header.php'); ?>
 </head>
 
-<?php require_once('loginconnection.php');
+<?php 
+require_once('loginconnection.php');
 ?>
 
 <style>

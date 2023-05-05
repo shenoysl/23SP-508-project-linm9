@@ -2,14 +2,37 @@
 <head>
 <title>login/signup</title>
 <?php require_once('header.php'); ?>
+<?php require_once('connection.php'); ?>
 
 </head>
 <?php 
 require_once('loginconnection.php');
+
+global $conn;
+
+
+$email= $_SESSION['Email'];
+$AnimeID = 'DSL';
+
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Check that passwords match
+    // TODO check whether email ALREADY exists
+        //INSERT INTO users table new user
+    echo "INSERT INTO rates_reviews(Anime_id, Email, Rating, Review) VALUES ($AnimeID, $email, :Rating, :Review)";
+        $stmt = $conn->prepare("INSERT INTO rates_reviews(Anime_id, Email, Rating, Review) VALUES ($AnimeID, $email, :Rating, :Review)");
+        $stmt->bindValue(':Rating', $_POST['Rating']);
+        $stmt->bindValue(':Review', $_POST['Review']);
+        $stmt->execute();
+        
+        //Go to login page to test out new sign in
+        header("Location: demon-slayer-info.php");
+    }
+
 ?>
 <style>
 body{
-background-image: url('photos/background.jpg');
+background-image: url('photos/ds.jpg');
 background-size: cover;
 font-family: 'Ubuntu', sans-serif;
 padding-top: 200px;
@@ -27,7 +50,7 @@ background: rgba(0,0,0,0.25);
 }
 .sign {
         padding-top: 40px;
-        color: #0d0a02;
+        color: white;
         font-family: 'Ubuntu', sans-serif;
         font-weight: bold;
         font-size: 23px;
@@ -82,20 +105,20 @@ cursor: pointer;
 		<form method="post">
 			<div class="row justify-content-center">
 				<div class="col-4">
-					<p class="sign" align="center">Sign in</p>
+					<p class="sign" align="center">Rate & Review Demon Slayer</p>
 					<div class="form-group">
-						<input type="text" class="form-control" id="Email" placeholder="Enter Email" name="Email" required>
+						<input type="text" class="form-control" id="Rating" placeholder="Enter Rating" name="Rating" required>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="password" placeholder="Enter Password" name="password" required>
+						<input type="text" class="form-control" id="Review" placeholder="Write Review" name="Review" required>
 					</div>
 					<br><div class = "wrapper">
-					<button type="submit" name = "submit" class="log-in">Log in</button>
-					<b> OR </b>
-					<a href = "signup" type = "signup" class = "signup">Sign Up</a></div><br/>
+					<button type="submit" name = "submit" class="log-in">Submit</button>
 				</div>
 			</div>
 		</form>
 	</div>
 </body>
 </html>
+
+

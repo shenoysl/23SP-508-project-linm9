@@ -6,8 +6,8 @@ require_once('connection.php');
 
 global $conn;
 
-$stmt = $conn->prepare("SELECT Release_year, Storyline, Genres, Studios
-                        FROM animes
+$stmt = $conn->prepare("SELECT Release_year, Storyline, Genres, Studios, IFNULL(ROUND(AVG(rating),1), 'No Ratings Yet') as 'Average_Rating'
+                        FROM animes join rates_reviews using (anime_id)
                         Where anime_id = 'AOT'");
 $stmt->execute();
 
@@ -100,22 +100,6 @@ color: #000;
 
 }
 
-.fixed {
-
-position: fixed;
-
-right: 0;
-
-top: 0;
-
-width: 260px;
-
-border: 3px solid #73AD21;
-
-}
-
-
-
 
 
 .spacing {
@@ -132,6 +116,7 @@ width: 80%;
     			<th>Storyline</th>
     			<th>Genres</th>
     			<th>Studios</th>
+    			<th>Average Rating</th>
 			</tr>
 		</body>
 	</div>
@@ -143,6 +128,7 @@ while ($row = $stmt->fetch()) {
              <td>$row[Storyline]</td>
              <td>$row[Genres]</td>
             <td>$row[Studios]</td>   
+            <td>$row[Average_Rating]</td>
           </tr>";
 }
 ?>
@@ -247,6 +233,6 @@ while ($row = $stmt4->fetch()) {
 
 
 
-<li><a class = "a.fixed" href="anime-titles.php">Go Back</a></li>
+<li><a href="anime-titles.php">Go Back</a></li>
 <li><a href="index.php">Go Home</a></li>
 </html>

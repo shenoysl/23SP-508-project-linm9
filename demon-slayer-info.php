@@ -6,8 +6,8 @@ require_once('connection.php');
 
 global $conn;
 
-$stmt = $conn->prepare("SELECT Release_year, Storyline, Genres, Studios
-                        FROM animes
+$stmt = $conn->prepare("SELECT Release_year, Storyline, Genres, Studios, IFNULL(ROUND(AVG(rating),1), 'No Ratings Yet') as 'Average_Rating'
+                        FROM animes join rates_reviews using (anime_id)
                         Where anime_id = 'DSL'");
 $stmt->execute();
 
@@ -116,6 +116,7 @@ width: 80%;
     			<th>Storyline</th>
     			<th>Genres</th>
     			<th>Studios</th>
+    			<th>Average Rating</th>
 			</tr>
 		</body>
 	</div>
@@ -127,6 +128,7 @@ while ($row = $stmt->fetch()) {
              <td>$row[Storyline]</td>
              <td>$row[Genres]</td>
             <td>$row[Studios]</td>   
+            <td>$row[Average_Rating]</td>
           </tr>";
 }
 ?>
@@ -233,4 +235,5 @@ while ($row = $stmt4->fetch()) {
 
 <li><a href="anime-titles.php">Go Back</a></li>
 <li><a href="index.php">Go Home</a></li>
+<li><a href="dsl-rating.php">Leave a Rating & Review!</a></li>
 </html>

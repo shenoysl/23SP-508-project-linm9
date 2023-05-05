@@ -66,6 +66,7 @@ text-align: justify;
 		<ul>
 			<li><a href = "anime-titles"> Anime List</a></li>
 			<li><a href = "login"> Log-in | Sign-up</a></li>
+			<li><a href = "rating-form"> Rate</a></li>
 		</ul>
 	</div>
 </div>
