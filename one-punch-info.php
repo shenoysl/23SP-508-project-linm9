@@ -1,7 +1,7 @@
 <html>
 <?php
 
-require_once('connection.php');
+require_once('loginconnection.php');
 
 
 global $conn;
@@ -189,5 +189,6 @@ while ($row = $stmt4->fetch()) {
 
 
 <li><a href="anime-titles.php">Go Back</a></li>
-<li><a href="index.php">Go Home</a></li>
+<li><a href="loggedon.php">Go Home</a></li>
+<li><a href="one-punch-man-rate-review.php">Leave a Rating & Review!</a>
 </html>

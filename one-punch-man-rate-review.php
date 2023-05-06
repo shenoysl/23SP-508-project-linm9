@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>DSL-Rating</title>
+<title>Attack on Titan Rate/Review</title>
 <?php require_once('header.php'); ?>
 </head>
 <?php 
@@ -9,7 +9,7 @@ require_once('loginconnection.php');
 
 global $conn;
 
-$AnimeID = 'DSL';
+$AnimeID = 'OPM';
 $username = $_SESSION['Username'];
 
 
@@ -32,12 +32,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindValue(':Email', $email);
         $stmt->execute();
         //Go to login page to test out new sign in   
-        header("Location: demon-slayer-info.php");
+        header("Location: one-punch-info.php");
     }
 ?>
 <style>
 body{
-background-image: url('photos/ds.jpg');
+background-image: url('photos/opm.jpg');
 background-size: cover;
 font-family: 'Ubuntu', sans-serif;
 padding-top: 200px;
@@ -110,7 +110,7 @@ cursor: pointer;
 		<form method="post">
 			<div class="row justify-content-center">
 				<div class="col-4">
-					<p class="sign" align="center">Rate & Review Demon Slayer</p>
+					<p class="sign" align="center">Rate & Review One Punch Man</p>
 					<div class="form-group">
 						<input type="text" class="form-control" id="Rating" placeholder="Enter Rating" name="Rating" required>
 					</div>

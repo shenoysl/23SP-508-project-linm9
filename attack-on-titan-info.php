@@ -1,7 +1,7 @@
 <html>
 <?php
 
-require_once('connection.php');
+require_once('loginconnection.php');
 
 
 global $conn;
@@ -34,6 +34,13 @@ FROM voice_actors join stars using (voice_actor_id) join animes using (anime_id)
 WHERE anime_id = 'AOT'");
 
 $stmt5->execute();
+
+$stmt6 = $conn->prepare("SELECT user, review, rating
+FROM getRatingandReview
+WHERE anime_id = 'AOT'");
+
+$stmt6->execute();
+
 
 
 
@@ -231,8 +238,33 @@ while ($row = $stmt4->fetch()) {
 ?>
 </table>
 
+<table class = "voiceactors">
+	<div class="container-fluid mt-3 mb-3">
+		<h5>Ratings & Reviews</h5>
+		<body>
+			<tr>
+    			<th class = "spacing">User</th>
+    			<th>Review</th>
+    			<th>Rating</th>
+			</tr>
+		</body>
+	</div>
+	
+<?php 
+while ($row = $stmt6->fetch()) {
+    echo "<tr>
+             <td>$row[user]</td>
+             <td>$row[review]</td>
+             <td>$row[rating]</td>
+          </tr>";
+} 
+
+?>
+</table>
+
 
 
 <li><a href="anime-titles.php">Go Back</a></li>
-<li><a href="index.php">Go Home</a></li>
+<li><a href="loggedon.php">Go Home</a></li>
+<li><a href="attack-on-titan-rate-review.php">Leave a Rating & Review!</a></li>
 </html>
