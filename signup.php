@@ -9,26 +9,37 @@ require_once ('connection.php');
 
 // Create new account and redirect to login
 if($_SERVER["REQUEST_METHOD"] == "POST") {
+    $user = 'user';
     // Check that passwords match
     // TODO check whether email ALREADY exists
     if($_POST['Password'] == $_POST['RePassword']) {
         //INSERT INTO users table new user
-        $stmt = $conn->prepare("INSERT INTO users (Email, Username, Password) VALUES (:Email, :Username, :Password)");
+        $stmt = $conn->prepare("INSERT INTO users (Email, Username, Password, user_type) VALUES (:Email, :Username, :Password, :user)");
         $stmt->bindValue(':Email', $_POST['Email']);
         $stmt->bindValue(':Username', $_POST['Username']);
-        $stmt->bindValue(':Password', $_POST['Password']);
+            //Hash password
+            $hash = password_hash($_POST['Password'], PASSWORD_DEFAULT);
+        $stmt->bindValue(':Password', $hash);
+        $stmt->bindValue(':user', $user);
         $stmt->execute();
-        
         //Go to login page to test out new sign in
-        header("Location: login.php");
+        header("Location: index.php");
     }
     else {
-        echo "Passwords do not match";
+        echo '<div class = "error"> Passwords do not match </div>';
     }
 }
 
 ?>
 <style>
+#error{
+    color: red;
+    width: 90px;
+    background: black;
+    position: fixed;
+    top: 30%;
+    left: 70%;
+}
 body{
 background-image: url('photos/background2.jpg');
 font-family: 'Ubuntu', sans-serif;

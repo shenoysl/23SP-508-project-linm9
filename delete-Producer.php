@@ -1,11 +1,38 @@
 <html>
 <head>
-<title>login/signup</title>
-<?php require_once('header.php'); 
-require_once('UserAdminLock.php');
-?>
+<title>Slime Rate/Review</title>
+<?php require_once('header.php'); ?>
 </head>
+<?php 
+require_once('loginconnection.php');
 
+
+global $conn;
+
+
+
+
+
+
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    $sqlQuery = "DELETE FROM producers WHERE Producer_id = :Producer_id";
+    
+    $stmt = $conn->prepare($sqlQuery);
+    $stmt->bindValue(':Producer_id', $_POST["Producer_id"]);
+    $stmt->execute();
+    
+        
+    $sqlQuery = "DELETE FROM produced WHERE Producer_id = :Producer_id";
+    
+    $stmt = $conn->prepare($sqlQuery);
+    $stmt->bindValue(':Producer_id', $_POST["Producer_id"]);
+    $stmt->execute();
+        //Go to login page to test out new sign in   
+        header("Location: admin-index.php");
+    }
+?>
 <style>
 body{
 background-image: url('photos/background.jpg');
@@ -26,7 +53,7 @@ background: rgba(0,0,0,0.25);
 }
 .sign {
         padding-top: 40px;
-        color: #0d0a02;
+        color: white;
         font-family: 'Ubuntu', sans-serif;
         font-weight: bold;
         font-size: 23px;
@@ -81,22 +108,20 @@ cursor: pointer;
 		<form method="post">
 			<div class="row justify-content-center">
 				<div class="col-4">
-					<p class="sign" align="center">Sign in</p>
+					<p class="sign" align="center">Delete a Producer</p>
 					<div class="form-group">
-						<input type="text" class="form-control" id="Email" placeholder="Enter Email" name="Email" required>
-					</div>
-					<div class="form-group">
-						<input type="text" class="form-control" id="password" placeholder="Enter Password" name="password" required>
-					</div>
-					<br><div class = "wrapper">
-					<button type="submit" name = "submit" class="log-in">Log in</button>
-					<b> OR </b>
-					<a href = "signup" type = "signup" class = "signup">Sign Up</a></div><br/>
-					<p>admin login: test@vcu.edu  $2y$10$gAzOiUvdit7B6t01FKz76OP3fMcoO9FoTiR7DvY5s68K9U6A.v4I2</p>
-					<p>user login: user@vcu.edu  $2y$10$vSxuCA./tmpYxubuITXC/OG.o2JI5NfHOhl1jS/Oh5n9DftV00Uf.</p>
+						<input type="text" class="form-control" id="Producer_id" placeholder="Enter Producer_ID" name="Producer_id" required>
+					</div>				
+					<br>
+
+					
+					
+					<button type="submit" name = "submit" class="log-in">Submit</button>
 				</div>
 			</div>
 		</form>
 	</div>
 </body>
 </html>
+
+

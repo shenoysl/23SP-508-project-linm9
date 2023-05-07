@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Naruto Rate/Review</title>
+<title>Hunter x Hunter Rate/Review</title>
 <?php require_once('header.php'); ?>
 </head>
 <?php 
@@ -9,7 +9,7 @@ require_once('loginconnection.php');
 
 global $conn;
 
-$AnimeID = 'Naruto';
+$AnimeID = 'HXH';
 $username = $_SESSION['Username'];
 
 
@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindValue(':Email', $email);
         $stmt->execute();
         //Go to login page to test out new sign in   
-        header("Location: naruto-info.php");
+        header("Location: hunter-x-hunter-info.php");
     }
     else{
         echo '<div id = "reAddError">You already left a rating/review!</div>';
@@ -60,7 +60,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 body{
-background-image: url('photos/naruto.jpg');
+background-image: url('photos/hunterhunter.jpeg');
 background-size: cover;
 font-family: 'Ubuntu', sans-serif;
 padding-top: 200px;
@@ -147,13 +147,13 @@ cursor: pointer;
 
 <body>
 <div class = "goBack">
-	<a href="naruto-info.php" type="goBack" class="goBack">Go Back</a>
+	<a href="hunter-x-hunter-info.php" type="goBack" class="goBack">Go Back</a>
 </div>
 	<div class="container mt-3 mb-3">
 		<form method="post">
 			<div class="row justify-content-center">
 				<div class="col-4">
-					<p class="sign" align="center">Rate & Review Naruto</p>
+					<p class="sign" align="center">Rate & Review Hunter x Hunter</p>
 					<div class="form-group">
 						<input type="text" class="form-control" id="Rating" placeholder="Enter Rating" name="Rating" required>
 					</div>

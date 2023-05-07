@@ -2,7 +2,7 @@
 
 // Show all employees on the employees table
 
-require_once('connection.php');
+require_once('loginconnection.php');
 
 
 global $conn;

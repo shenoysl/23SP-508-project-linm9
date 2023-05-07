@@ -24,7 +24,15 @@ if(!empty($queryResult))
 $email = $queryResult['Email'];
 }
 
+$check = $conn->prepare("SELECT Anime_id FROM rates_reviews WHERE Email=:Email AND Anime_id=:Anime_id");
+$check->bindValue(':Anime_id', $AnimeID);
+$check->bindValue(':Email', $email);
+$check->execute();
+
+$checking = $check->fetch();
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
+    if(empty($checking)) {
         $stmt = $conn->prepare("INSERT INTO rates_reviews (Rating, Review, Anime_id, Email) VALUES (:Rating, :Review, :Anime_id, :Email)");        
         $stmt->bindValue(':Rating', $_POST['Rating']);
         $stmt->bindValue(':Review', $_POST['Review']);
@@ -34,10 +42,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         //Go to login page to test out new sign in   
         header("Location: attack-on-titan-info.php");
     }
+    else{
+        echo '<div id = "reAddError">You already left a rating/review!</div>';
+    }
+}
 ?>
 <style>
+
+#reAddError {
+    color: red;
+    width: 90px;
+    background: black;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
+
+
 body{
-background-image: url('photos/aot3.jpeg');
+background-image: url('photos/aotBackground.jpg');
 background-size: cover;
 font-family: 'Ubuntu', sans-serif;
 padding-top: 200px;
@@ -102,10 +125,30 @@ cursor: pointer;
         font-size: 13px;
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
+
+.goBack {
+    color: #0d0a02;
+    cursor: pointer;
+    color: #000;
+    text-align: center;
+    background: #FFF;
+    border-color: #821DB7;
+    font-family: papyrus, fantasy;
+    font-size: 20px;
+    width: 100px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
 </style>
 
 
 <body>
+<div class = "goBack">
+	<a href="attack-on-titan-info.php" type="goBack" class="goBack">Go Back</a>
+</div>
 	<div class="container mt-3 mb-3">
 		<form method="post">
 			<div class="row justify-content-center">

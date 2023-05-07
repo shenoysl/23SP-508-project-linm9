@@ -3,47 +3,48 @@
 require_once ('header.php');
 require_once('loginconnection.php');
 
+
 global $conn;
 
 $stmt = $conn->prepare("SELECT Release_year, Storyline, Genres, Studios, IFNULL(ROUND(AVG(rating),1), 'No Ratings Yet') as 'Average_Rating'
-                        FROM animes join rates_reviews using (anime_id)
-                        Where anime_id = 'AOT'");
+                        FROM animes left join rates_reviews using (anime_id)
+                        Where anime_id = 'HXH'");
 $stmt->execute();
 
-$stmt2 = $conn->prepare("SELECT anime_award_name as 'Award_Name', year as 'Year_Awarded'
+$stmt2 = $conn->prepare("SELECT IFNULL(anime_award_name, 'No Awards Yet') as 'Award_Name', year as 'Year_Awarded'
 FROM anime_award join anime_awarded using (anime_award_id) join animes using (anime_id)
-WHERE anime_id = 'AOT'");
+WHERE anime_id = 'HXH'");
 
 $stmt2->execute();
 
 $stmt3 = $conn->prepare("SELECT character_voiced as 'Character', CONCAT(first_name, ' ', last_name) as 'Voice_Actor', Birthdate
 FROM voice_actors join stars using (voice_actor_id) join animes using (anime_id)
-WHERE anime_id = 'AOT'");
+WHERE anime_id = 'HXH'");
 
 $stmt3->execute();
 
 $stmt4 = $conn->prepare("SELECT CONCAT(first_name, ' ', last_name) as 'Name', IFNULL(Birthdate, 'Unknown') as 'Birthdate'
 FROM producers join produced using (producer_id) join animes using (anime_id)
-WHERE anime_id = 'AOT'");
+WHERE anime_id = 'HXH'");
 
 $stmt4->execute();
 
 $stmt5 = $conn->prepare("SELECT CONCAT(first_name, ' ', last_name) as 'Actor', Name, Year
 FROM voice_actors join stars using (voice_actor_id) join animes using (anime_id) join actor_awarded using (voice_actor_id) join actor_award using (actor_award_id)
-WHERE anime_id = 'AOT'");
+WHERE anime_id = 'HXH'");
 
 $stmt5->execute();
 
 $stmt6 = $conn->prepare("SELECT user, review, rating
 FROM getRatingandReview
-WHERE anime_id = 'AOT'");
+WHERE anime_id = 'HXH'");
 
 $stmt6->execute();
 
 
-$AnimeID = 'AOT';
+$AnimeID = 'HXH';
 $username = $_SESSION['Username'];
-$AnimeName = 'Attack on Titan';
+$AnimeName = 'Hunter x Hunter';
 
 
 $stmt7 = $conn->prepare("SELECT Email FROM users WHERE Username=:Username");
@@ -56,7 +57,6 @@ if(!empty($queryResult))
 {
     $email = $queryResult['Email'];
 }
-
 $check = $conn->prepare("SELECT Anime_name FROM user_list WHERE Email=:Email AND Anime_id=:Anime_id");
 $check->bindValue(':Anime_id', $AnimeID);
 $check->bindValue(':Email', $email);
@@ -66,13 +66,13 @@ $checking = $check->fetch();
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     if(empty($checking)) {
-    $stmt7 = $conn->prepare("INSERT INTO user_list (Anime_id, Anime_name, Email) VALUES (:Anime_id, :Anime_name, :Email)");
-    $stmt7->bindValue(':Anime_id', $AnimeID);
-    $stmt7->bindValue(':Anime_name', $AnimeName);
-    $stmt7->bindValue(':Email', $email);
-    $stmt7->execute();
-    
-    header("Location: attack-on-titan-info.php");
+        $stmt7 = $conn->prepare("INSERT INTO user_list (Anime_id, Anime_name, Email) VALUES (:Anime_id, :Anime_name, :Email)");
+        $stmt7->bindValue(':Anime_id', $AnimeID);
+        $stmt7->bindValue(':Anime_name', $AnimeName);
+        $stmt7->bindValue(':Email', $email);
+        $stmt7->execute();
+        
+        header("Location: hunter-x-hunter-info.php");
     }
     else {
         echo '<div id = "reAddError">You already added it!</div>';
@@ -90,7 +90,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     left: 50%;
 }
 body{
-    background-image: url('photos/aotBackground2.jpg');
+    background-image: url('photos/hhBackground.jpg');
     background-size: cover;
 }
 h4 {
@@ -98,13 +98,13 @@ h4 {
     font-family: papyrus, fantasy;
     font-size: 50px;
     font-weight: bold;
-    color: #000;   
+    color: #FFF;   
 }
 h5 {
     font-family: papyrus, fantasy;
     font-size: 25px;
     font-weight: bold;
-    color: #000;  
+    color: #FFF;  
 }
 th {
     font-size: 20px;
@@ -114,7 +114,7 @@ table {
     box-shadow: 0 1px 20px 0 rgba(69,90,100,0.8);
     font-family: papyrus, fantasy; 
     font-size: 20px;
-    color: #000;
+    color: #FFF;
     font-weight: bold;
     background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2));
     border-top-left-radius: 5px;
@@ -122,7 +122,7 @@ table {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-table .aotInfo {
+table .hhInfo {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -186,8 +186,8 @@ button[type="submit"] {
 
 <body>
 <table>
-	<div class="aotInfo">
-		<h4>Attack on Titan</h4>
+	<div class="hhInfo">
+		<h4>Hunter x Hunter</h4>
 			<tr>
     			<th>Release_Year</th>
     			<th>Storyline</th>
@@ -309,7 +309,7 @@ button[type="submit"] {
 	<b> : </b>
 	<a href="loggedon">Go Home</a>
 	<b> : </b>
-	<a href="attack-on-titan-rate-review.php">Leave a Rating & Review!</a>
+	<a href="hunter-x-hunter-rate-review.php">Leave a Rating & Review!</a>
 </div>
 <div class="container mt-3 mb-3">
 	<form method="post">
