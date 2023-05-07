@@ -16,20 +16,14 @@ global $conn;
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    $sqlQuery = "DELETE FROM actor_award WHERE Actor_award_id = :Actor_award_id";
-    
-    $stmt = $conn->prepare($sqlQuery);
-    $stmt->bindValue(':Actor_award_id', $_POST["Actor_award_id"]);
-    $stmt->execute();
-    
-        
-    $sqlQuery = "DELETE FROM actor_awarded WHERE Actor_award_id = :Actor_award_id";
-    
-    $stmt = $conn->prepare($sqlQuery);
-    $stmt->bindValue(':Actor_award_id', $_POST["Actor_award_id"]);
-    $stmt->execute();
-    
+        $stmt = $conn->prepare("INSERT INTO animes (Anime_id, Anime_name, Release_year, Storyline, Genres, Studios) VALUES (:Anime_id, :Anime_name, :Release_year, :Storyline, :Genres, :Studios)");        
+        $stmt->bindValue(':Anime_id', $_POST['Anime_id']);
+        $stmt->bindValue(':Anime_name', $_POST['Anime_name']);
+        $stmt->bindValue(':Release_year', $_POST['Release_year']);
+        $stmt->bindValue(':Storyline', $_POST['Storyline']);
+        $stmt->bindValue(':Genres', $_POST['Genres']);
+        $stmt->bindValue(':Studios', $_POST['Studios']);
+        $stmt->execute();
         //Go to login page to test out new sign in   
         header("Location: admin-index.php");
     }
@@ -109,10 +103,26 @@ cursor: pointer;
 		<form method="post">
 			<div class="row justify-content-center">
 				<div class="col-4">
-					<p class="sign" align="center">Delete an Actor Award</p>
+					<p class="sign" align="center">Add an Anime</p>
 					<div class="form-group">
-						<input type="text" class="form-control" id="Actor_award_id" placeholder="Enter Actor_award_id" name="Actor_award_id" required>
-					</div>				
+						<input type="text" class="form-control" id="Anime_id" placeholder="Enter Anime ID" name="Anime_id" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="Anime_name" placeholder="Enter Anime Name" name="Anime_name" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="Release_year" placeholder="Enter Release Year" name="Release_year" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="Storyline" placeholder="Enter Storyline" name="Storyline" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="Genres" placeholder="Enter Genres" name="Genres" required>
+						</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="Studios" placeholder="Enter Studios" name="Studios" required>
+					</div>
+				
 					<br>
 
 					

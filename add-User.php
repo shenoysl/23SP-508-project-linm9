@@ -16,20 +16,12 @@ global $conn;
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    $sqlQuery = "DELETE FROM actor_award WHERE Actor_award_id = :Actor_award_id";
-    
-    $stmt = $conn->prepare($sqlQuery);
-    $stmt->bindValue(':Actor_award_id', $_POST["Actor_award_id"]);
-    $stmt->execute();
-    
-        
-    $sqlQuery = "DELETE FROM actor_awarded WHERE Actor_award_id = :Actor_award_id";
-    
-    $stmt = $conn->prepare($sqlQuery);
-    $stmt->bindValue(':Actor_award_id', $_POST["Actor_award_id"]);
-    $stmt->execute();
-    
+        $stmt = $conn->prepare("INSERT INTO users (Email, Username, Password, user_type) VALUES (:Email, :Username, :Password, :user_type)");        
+        $stmt->bindValue(':Email', $_POST['Email']);
+        $stmt->bindValue(':Username', $_POST['Username']);
+        $stmt->bindValue(':Password', $_POST['Password']);
+        $stmt->bindValue(':user_type', $_POST['user_type']);
+        $stmt->execute();
         //Go to login page to test out new sign in   
         header("Location: admin-index.php");
     }
@@ -109,11 +101,20 @@ cursor: pointer;
 		<form method="post">
 			<div class="row justify-content-center">
 				<div class="col-4">
-					<p class="sign" align="center">Delete an Actor Award</p>
+					<p class="sign" align="center">Add a User</p>
 					<div class="form-group">
-						<input type="text" class="form-control" id="Actor_award_id" placeholder="Enter Actor_award_id" name="Actor_award_id" required>
-					</div>				
-					<br>
+						<input type="text" class="form-control" id="Email" placeholder="Enter Email" name="Email" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="Username" placeholder="Enter Username" name="Username" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="Password" placeholder="Enter Password" name="Password" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="user_type" placeholder="Enter Type of User" name="user_type" required>
+					</div>
+		<br>
 
 					
 					

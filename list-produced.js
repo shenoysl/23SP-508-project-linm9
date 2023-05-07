@@ -1,16 +1,16 @@
 $(document).ready(function(){
 	
-	$('#table-voice_actors').DataTable({
+	$('#table-produced').DataTable({
 		"dom": 'Blfrtip',
 		"ordering": false,
 		"searching": false,
 		"paging": false,
 		"responsive": true,
 		"ajax":{
-			url:"voice-actor-action.php",
+			url:"produced-action.php",
 			type:"POST",
 			data:{
-					action:'listVoiceActors'
+					action:'listProduced'
 				 },
 			dataType:"json"
 		}

@@ -16,20 +16,11 @@ global $conn;
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    $sqlQuery = "DELETE FROM actor_award WHERE Actor_award_id = :Actor_award_id";
-    
-    $stmt = $conn->prepare($sqlQuery);
-    $stmt->bindValue(':Actor_award_id', $_POST["Actor_award_id"]);
-    $stmt->execute();
-    
-        
-    $sqlQuery = "DELETE FROM actor_awarded WHERE Actor_award_id = :Actor_award_id";
-    
-    $stmt = $conn->prepare($sqlQuery);
-    $stmt->bindValue(':Actor_award_id', $_POST["Actor_award_id"]);
-    $stmt->execute();
-    
+        $stmt = $conn->prepare("INSERT INTO actor_awarded (Voice_actor_id, Actor_award_id, Year) VALUES (:Voice_actor_id, :Actor_award_id, :Year)");        
+        $stmt->bindValue(':Voice_actor_id', $_POST['Voice_actor_id']);
+        $stmt->bindValue(':Actor_award_id', $_POST['Actor_award_id']);
+        $stmt->bindValue(':Year', $_POST['Year']);
+        $stmt->execute();
         //Go to login page to test out new sign in   
         header("Location: admin-index.php");
     }
@@ -109,11 +100,18 @@ cursor: pointer;
 		<form method="post">
 			<div class="row justify-content-center">
 				<div class="col-4">
-					<p class="sign" align="center">Delete an Actor Award</p>
+					<p class="sign" align="center">Give Award to Actor</p>
 					<div class="form-group">
-						<input type="text" class="form-control" id="Actor_award_id" placeholder="Enter Actor_award_id" name="Actor_award_id" required>
-					</div>				
-					<br>
+						<input type="text" class="form-control" id="Voice_actor_id" placeholder="Enter Voice_actor_id" name="Voice_actor_id" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="Actor_award_id" placeholder="Enter Actor Award ID" name="Actor_award_id" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="Year" placeholder="Enter Year Awarded" name="Year" required>
+					</div>
+		<br>
+		<br>
 
 					
 					

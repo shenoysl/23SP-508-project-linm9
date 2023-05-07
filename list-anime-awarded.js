@@ -1,16 +1,16 @@
 $(document).ready(function(){
 	
-	$('#table-voice_actors').DataTable({
+	$('#table-anime_awarded').DataTable({
 		"dom": 'Blfrtip',
 		"ordering": false,
 		"searching": false,
 		"paging": false,
 		"responsive": true,
 		"ajax":{
-			url:"voice-actor-action.php",
+			url:"anime-awarded-action.php",
 			type:"POST",
 			data:{
-					action:'listVoiceActors'
+					action:'listAnimeAwarded'
 				 },
 			dataType:"json"
 		}

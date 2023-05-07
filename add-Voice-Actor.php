@@ -16,20 +16,13 @@ global $conn;
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    $sqlQuery = "DELETE FROM actor_award WHERE Actor_award_id = :Actor_award_id";
-    
-    $stmt = $conn->prepare($sqlQuery);
-    $stmt->bindValue(':Actor_award_id', $_POST["Actor_award_id"]);
-    $stmt->execute();
-    
-        
-    $sqlQuery = "DELETE FROM actor_awarded WHERE Actor_award_id = :Actor_award_id";
-    
-    $stmt = $conn->prepare($sqlQuery);
-    $stmt->bindValue(':Actor_award_id', $_POST["Actor_award_id"]);
-    $stmt->execute();
-    
+        $stmt = $conn->prepare("INSERT INTO voice_actors (Voice_actor_id, Character_voiced, First_name, Last_name, Birthdate) VALUES (:Voice_actor_id, :Character_voiced, :First_name, :Last_name, :Birthdate)");        
+        $stmt->bindValue(':Producer_id', $_POST['Producer_id']);
+        $stmt->bindValue(':Character_voiced', $_POST['Character_voiced']);
+        $stmt->bindValue(':First_name', $_POST['First_name']);
+        $stmt->bindValue(':Last_name', $_POST['Last_name']);
+        $stmt->bindValue(':Birthdate', $_POST['Birthdate']);
+        $stmt->execute();
         //Go to login page to test out new sign in   
         header("Location: admin-index.php");
     }
@@ -109,14 +102,25 @@ cursor: pointer;
 		<form method="post">
 			<div class="row justify-content-center">
 				<div class="col-4">
-					<p class="sign" align="center">Delete an Actor Award</p>
+					<p class="sign" align="center">Add a Voice Actor</p>
 					<div class="form-group">
-						<input type="text" class="form-control" id="Actor_award_id" placeholder="Enter Actor_award_id" name="Actor_award_id" required>
-					</div>				
+						<input type="text" class="form-control" id="Voice_actor_id" placeholder="Enter Voice Actor ID" name="Voice_actor_id" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="Character_voiced" placeholder="Enter Character Voiced" name="Character_voiced" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="First_name" placeholder="Enter First Name" name="First_name" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="Last_name" placeholder="Enter Last Name" name="Last_name" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="Birthdate" placeholder="Enter Birthdate(YYYY/MM/DD)" name="Birthdate" required>
+					</div>
+				
 					<br>
 
-					
-					
 					<button type="submit" name = "submit" class="log-in">Submit</button>
 				</div>
 			</div>

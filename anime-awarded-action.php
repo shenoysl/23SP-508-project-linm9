@@ -3,11 +3,11 @@ require_once ('loginconnection.php');
 
 global $conn;
 
-function listVoiceActors()
+function listAnimeAwarded()
 {
     global $conn;
     
-    $sqlQuery = "SELECT * FROM voice_actors";
+    $sqlQuery = "SELECT * FROM anime_awarded";
     $stmt = $conn->prepare($sqlQuery);
     $stmt->execute();
     
@@ -18,11 +18,9 @@ function listVoiceActors()
     while ($sqlRow = $stmt->fetch()) {
         $dataRow = array();
         
-        $dataRow[] = $sqlRow['Voice_actor_id'];
-        $dataRow[] = $sqlRow['Character_voiced'];
-        $dataRow[] = $sqlRow['First_Name'];
-        $dataRow[] = $sqlRow['Last_Name'];
-        $dataRow[] = $sqlRow['Birthdate'];
+        $dataRow[] = $sqlRow['Anime_id'];
+        $dataRow[] = $sqlRow['Anime_award_id'];
+        $dataRow[] = $sqlRow['Year'];
         $dataTable[] = $dataRow;
     }
     
@@ -41,10 +39,7 @@ function listVoiceActors()
 
 
 
-if(!empty($_POST['action']) && $_POST['action'] == 'listVoiceActors') {
-    listVoiceActors();
+if(!empty($_POST['action']) && $_POST['action'] == 'listAnimeAwarded') {
+    listAnimeAwarded();
 }
-
-
-
 

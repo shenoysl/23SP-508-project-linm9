@@ -3,7 +3,7 @@
 <title>Producer List</title>
 <?php require_once('header.php'); ?>
 <!-- My JS libraries -->
-<script src="js/list-voice-actors.js"></script>
+<script src="js/list-rates-reviews.js"></script>
 </head>
 
 <?php require_once('connection.php'); ?>
@@ -25,17 +25,16 @@ h5 {
 <body>
 
 <div class="container-fluid mt-3 mb-3">
-	<h4>Voice Actors</h4>
+	<h4>Rates & Reviews</h4>
 	<div>
-		<table id="table-voice_actors" class="table table-bordered table-striped">
+		<table id="table-rates_reviews" class="table table-bordered table-striped">
 			<thead>
 				<tr>
 					
-					<th>Voice_actor_id</th>
-					<th>Character_voiced</th>
-					<th>First_name</th>
-					<th>Last_name</th>
-					<th>Birthdate</th>
+					<th>Rating</th>
+					<th>Review</th>
+					<th>Anime_id</th>
+					<th>Email</th>
 				</tr>
 			</thead>
 		</table>
