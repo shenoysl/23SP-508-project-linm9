@@ -69,22 +69,22 @@ padding-top: 200px;
     text-align:center;
 }
 .col-4 {
-background: rgba(0,0,0,0.25);
-        width: 400px;
-        height: 320px;
-        margin: auto;
-        border-radius: 1.5em;
-        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.4);   
+    background: rgba(0,0,0,0.25);
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 1.5em;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.4);   
 }
 .sign {
-        padding-top: 40px;
-        color: white;
-        font-family: 'Ubuntu', sans-serif;
-        font-weight: bold;
-        font-size: 23px;
+    padding-top: 40px;
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 23px;
     }
 .form-group {
-width: 76%;
+    width: 76%;
     color: rgb(38, 50, 56);
     font-weight: 700;
     font-size: 14px;
@@ -98,35 +98,38 @@ width: 76%;
 
 .log-in {
       cursor: pointer;
-        border-radius: 5em;
-        color: #FFF;
-        background: #0d0a02;
-        border: 0;
-        padding-left: 40px;
-        padding-right: 40px;
-        padding-bottom: 10px;
-        padding-top: 10px;
-        font-family: 'Ubuntu', sans-serif;
-        font-size: 13px;
-        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+      border-radius: 5em;
+      color: #FFF;
+      background: #0d0a02;
+      border: 0;
+      padding-left: 40px;
+      padding-right: 40px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 13px;
+      box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
     }
 .signup {
-color: #0d0a02;
-cursor: pointer;
-        border-radius: 5em;
-        color: #FFF;
-        background: #0d0a02;
-        border: 0;
-        padding-left: 40px;
-        padding-right: 40px;
-        padding-bottom: 10px;
-        padding-top: 10px;
-        font-family: 'Ubuntu', sans-serif;
-        font-size: 13px;
-        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    color: #0d0a02;
+    cursor: pointer;
+    border-radius: 5em;
+    color: #FFF;
+    background: #0d0a02;
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
 
 .goBack {
+    position: absolute;
+    top: 5%;
+    left: 1%;
     color: #0d0a02;
     cursor: pointer;
     color: #000;
