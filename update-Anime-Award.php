@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Slime Rate/Review</title>
+<title>Update Anime Award</title>
 <?php require_once('header.php'); ?>
 </head>
 <?php 
@@ -13,27 +13,24 @@ if (isset($_SESSION['Username']) && isset($_SESSION['user_type'])) {
 
 global $conn;
 
+
+
+
+
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $sqlQuery = "UPDATE animes
-                        SET
-                        Anime_name = :Anime_name,
-                        Release_year = :Release_year,
-                        Storyline = :Storyline,
-                        Genres = :Genres,
-                        Studios = :Studios
-                    WHERE Anime_id = :Anime_id";
+    
+    $sqlQuery = "UPDATE anime_award
+               SET Anime_award_name = :Anime_award_name
+               WHERE Anime_award_id = :Anime_award_id";
+    
     $stmt = $conn->prepare($sqlQuery);
-    $stmt->bindValue(':Anime_name', $_POST["Anime_name"]);
-    $stmt->bindValue(':Release_year', $_POST["Release_year"]);
-    $stmt->bindValue(':Storyline', $_POST["Storyline"]);
-    $stmt->bindValue(':Genres', $_POST["Genres"]);
-    $stmt->bindValue(':Studios', $_POST["Studios"]);
-    $stmt->bindValue(':Anime_id', $_POST["Anime_id"]);
+    $stmt->bindValue(':Anime_award_id', $_POST['Anime_award_id']);
+    $stmt->bindValue(':Anime_award_name', $_POST['Anime_award_name']);
     $stmt->execute();
-    
+    //Go to login page to test out new sign in
     header("Location: admin-index.php");
-    
-    }
+}
 ?>
 <style>
 body{
@@ -46,11 +43,9 @@ padding-top: 200px;
     text-align:center;
 }
 .col-4 {
-        position: absolute;
-        top: 20%;
-        background: rgba(0,0,0,0.25);
+background: rgba(0,0,0,0.25);
         width: 400px;
-        height: 550px;
+        height: 320px;
         margin: auto;
         border-radius: 1.5em;
         box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.4);   
@@ -104,6 +99,7 @@ cursor: pointer;
         font-size: 13px;
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
+
 .goBack {
     position: absolute;
     left: 1%;
@@ -124,7 +120,7 @@ cursor: pointer;
 }
 button {
     position: absolute;
-    left: 35%;
+    left: 46%;
 }
 </style>
 
@@ -137,27 +133,17 @@ button {
 		<form method="post">
 			<div class="row justify-content-center">
 				<div class="col-4">
-					<p class="sign" align="center">Update an Anime</p>
+					<p class="sign" align="center">Update an Anime Award</p>
 					<div class="form-group">
-						<input type="text" class="form-control" id="Anime_name" placeholder="Enter Anime Name" name="Anime_name" required>
+						<input type="text" class="form-control" id="Anime_award_id" placeholder="Enter Anime_award_id to update" name="Anime_award_id" required>
 					</div>
 					<div class="form-group">
-						<input type="year" class="form-control" id="Release_year" placeholder="Enter Release Year" name="Release_year" required>
+						<input type="text" class="form-control" id="Anime_award_name" placeholder="Enter Anime Award Name" name="Anime_award_name" required>
 					</div>
-					<div class="form-group">
-						<input type="text" class="form-control" id="Storyline" placeholder="Enter Storyline" name="Storyline" required>
-					</div>
-					<div class="form-group">
-						<input type="text" class="form-control" id="Genres" placeholder="Enter Genres" name="Genres" required>
-						</div>
-					<div class="form-group">
-						<input type="text" class="form-control" id="Studios" placeholder="Enter Studios" name="Studios" required>
-					</div>
-						<div class="form-group">
-						<input type="text" class="form-control" id="Anime_id" placeholder="Enter Anime ID to update" name="Anime_id" required>
-					</div>
-				
-					<br>
+		<br>
+
+					
+					
 					<button type="submit" name = "submit" class="log-in">Submit</button>
 				</div>
 			</div>

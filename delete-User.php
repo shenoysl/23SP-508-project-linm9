@@ -1,19 +1,17 @@
 <html>
 <head>
-<title>Slime Rate/Review</title>
+<title>Delete User</title>
 <?php require_once('header.php'); ?>
 </head>
 <?php 
 require_once('loginconnection.php');
-
+if (isset($_SESSION['Username']) && isset($_SESSION['user_type'])) {
+    if ($_SESSION['user_type'] != "Admin") {
+        header ("Location: index");
+    }
+}
 
 global $conn;
-
-
-
-
-
-
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     
@@ -53,7 +51,7 @@ padding-top: 200px;
 .col-4 {
 background: rgba(0,0,0,0.25);
         width: 400px;
-        height: 320px;
+        height: 220px;
         margin: auto;
         border-radius: 1.5em;
         box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.4);   
@@ -107,6 +105,10 @@ cursor: pointer;
         font-size: 13px;
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
+button {
+    position: absolute;
+    left: 46%;
+}
 </style>
 
 
@@ -118,11 +120,8 @@ cursor: pointer;
 					<p class="sign" align="center">Delete a User</p>
 					<div class="form-group">
 						<input type="text" class="form-control" id="Email" placeholder="Enter User Email" name="Email" required>
-					</div>				
-					<br>
-
-					
-					
+					</div>
+					<p></p>
 					<button type="submit" name = "submit" class="log-in">Submit</button>
 				</div>
 			</div>

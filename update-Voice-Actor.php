@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Slime Rate/Review</title>
+<title>Update Voice Actor</title>
 <?php require_once('header.php'); ?>
 </head>
 <?php 
@@ -14,26 +14,24 @@ if (isset($_SESSION['Username']) && isset($_SESSION['user_type'])) {
 global $conn;
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $sqlQuery = "UPDATE animes
+    $sqlQuery = "UPDATE voice_actors
                         SET
-                        Anime_name = :Anime_name,
-                        Release_year = :Release_year,
-                        Storyline = :Storyline,
-                        Genres = :Genres,
-                        Studios = :Studios
-                    WHERE Anime_id = :Anime_id";
+                        Character_voiced = :Character_voiced,
+                        First_Name = :First_Name,
+                        Last_Name = :Last_Name,
+                        Birthdate = :Birthdate
+                    WHERE Voice_actor_id = :Voice_actor_id";
+    
     $stmt = $conn->prepare($sqlQuery);
-    $stmt->bindValue(':Anime_name', $_POST["Anime_name"]);
-    $stmt->bindValue(':Release_year', $_POST["Release_year"]);
-    $stmt->bindValue(':Storyline', $_POST["Storyline"]);
-    $stmt->bindValue(':Genres', $_POST["Genres"]);
-    $stmt->bindValue(':Studios', $_POST["Studios"]);
-    $stmt->bindValue(':Anime_id', $_POST["Anime_id"]);
+    $stmt->bindValue(':Character_voiced', $_POST['Character_voiced']);
+    $stmt->bindValue(':First_Name', $_POST['First_Name']);
+    $stmt->bindValue(':Last_Name', $_POST['Last_Name']);
+    $stmt->bindValue(':Birthdate', $_POST['Birthdate']);
+    $stmt->bindValue(':Voice_actor_id', $_POST['Voice_actor_id']);
     $stmt->execute();
-    
+    //Go to login page to test out new sign in
     header("Location: admin-index.php");
-    
-    }
+}
 ?>
 <style>
 body{
@@ -50,7 +48,7 @@ padding-top: 200px;
         top: 20%;
         background: rgba(0,0,0,0.25);
         width: 400px;
-        height: 550px;
+        height: 500px;
         margin: auto;
         border-radius: 1.5em;
         box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.4);   
@@ -137,27 +135,25 @@ button {
 		<form method="post">
 			<div class="row justify-content-center">
 				<div class="col-4">
-					<p class="sign" align="center">Update an Anime</p>
+					<p class="sign" align="center">Update a Voice Actor</p>
 					<div class="form-group">
-						<input type="text" class="form-control" id="Anime_name" placeholder="Enter Anime Name" name="Anime_name" required>
+						<input type="text" class="form-control" id="Voice_actor_id" placeholder="Enter Voice Actor ID to update" name="Voice_actor_id" required>
 					</div>
 					<div class="form-group">
-						<input type="year" class="form-control" id="Release_year" placeholder="Enter Release Year" name="Release_year" required>
+						<input type="text" class="form-control" id="Character_voiced" placeholder="Enter Character Voiced" name="Character_voiced" required>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="Storyline" placeholder="Enter Storyline" name="Storyline" required>
+						<input type="text" class="form-control" id="First_Name" placeholder="Enter First Name" name="First_Name" required>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="Genres" placeholder="Enter Genres" name="Genres" required>
-						</div>
-					<div class="form-group">
-						<input type="text" class="form-control" id="Studios" placeholder="Enter Studios" name="Studios" required>
+						<input type="text" class="form-control" id="Last_Name" placeholder="Enter Last Name" name="Last_Name" required>
 					</div>
-						<div class="form-group">
-						<input type="text" class="form-control" id="Anime_id" placeholder="Enter Anime ID to update" name="Anime_id" required>
+					<div class="form-group">
+						<input type="text" class="form-control" id="Birthdate" placeholder="Enter Birthdate(YYYY/MM/DD)" name="Birthdate" required>
 					</div>
 				
 					<br>
+
 					<button type="submit" name = "submit" class="log-in">Submit</button>
 				</div>
 			</div>

@@ -1,19 +1,17 @@
 <html>
 <head>
-<title>Slime Rate/Review</title>
+<title>Add a user/Change priviledges</title>
 <?php require_once('header.php'); ?>
 </head>
 <?php 
 require_once('loginconnection.php');
-
+if (isset($_SESSION['Username']) && isset($_SESSION['user_type'])) {
+    if ($_SESSION['user_type'] != "Admin") {
+        header ("Location: index");
+    }
+}
 
 global $conn;
-
-
-
-
-
-
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $conn->prepare("INSERT INTO users (Email, Username, Password, user_type) VALUES (:Email, :Username, :Password, :user_type)");        
@@ -37,9 +35,11 @@ padding-top: 200px;
     text-align:center;
 }
 .col-4 {
-background: rgba(0,0,0,0.25);
+        position: absolute;
+        top: 20%;
+        background: rgba(0,0,0,0.25);
         width: 400px;
-        height: 320px;
+        height: 420px;
         margin: auto;
         border-radius: 1.5em;
         box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.4);   
@@ -52,7 +52,7 @@ background: rgba(0,0,0,0.25);
         font-size: 23px;
     }
 .form-group {
-width: 76%;
+    width: 76%;
     color: rgb(38, 50, 56);
     font-weight: 700;
     font-size: 14px;
@@ -93,10 +93,35 @@ cursor: pointer;
         font-size: 13px;
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
+.goBack {
+    position: absolute;
+    left: 1%;
+    top: 3%;
+    color: #0d0a02;
+    cursor: pointer;
+    color: #000;
+    text-align: center;
+    background: #FFF;
+    border-color: #821DB7;
+    font-family: papyrus, fantasy;
+    font-size: 20px;
+    width: 100px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-to   p-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+button {
+    position: absolute;
+    left: 35%;
+}
 </style>
 
 
 <body>
+<div class = "goBack">
+	<a href="admin-index.php" type="goBack" class="goBack">Go Back</a>
+</div>
 	<div class="container mt-3 mb-3">
 		<form method="post">
 			<div class="row justify-content-center">
@@ -114,10 +139,7 @@ cursor: pointer;
 					<div class="form-group">
 						<input type="text" class="form-control" id="user_type" placeholder="Enter Type of User" name="user_type" required>
 					</div>
-		<br>
-
-					
-					
+					<br>
 					<button type="submit" name = "submit" class="log-in">Submit</button>
 				</div>
 			</div>

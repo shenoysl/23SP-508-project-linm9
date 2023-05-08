@@ -107,10 +107,10 @@ cursor: pointer;
 						<input type="text" class="form-control" id="Email" placeholder="Email" name="Email" required>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="Password" placeholder="Password" name="Password" required>
+						<input type="password" class="form-control" id="Password" placeholder="Password" name="Password" required>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="RePassword" placeholder="Re-Enter Password" name="RePassword" required>
+						<input type="password" class="form-control" id="RePassword" placeholder="Re-Enter Password" name="RePassword" required>
 					</div>
 					<br><div class = "wrapper">
 					<button type="submit" class="signup">Sign-Up</button></div>
