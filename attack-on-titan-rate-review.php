@@ -74,7 +74,7 @@ background: rgba(0,0,0,0.25);
         height: 320px;
         margin: auto;
         border-radius: 1.5em;
-        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.4);   
+        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.5);   
 }
 .sign {
         padding-top: 40px;
@@ -127,6 +127,9 @@ cursor: pointer;
 }
 
 .goBack {
+    position: absolute;
+    left: 1%;
+    top: 5%;
     color: #0d0a02;
     cursor: pointer;
     color: #000;
