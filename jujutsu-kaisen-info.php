@@ -73,6 +73,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt7->execute();
         
         header("Location: jujutsu-kaisen-info.php");
+        
+        
     }
     else {
         echo '<div id = "reAddError">You already added it!</div>';
@@ -97,13 +99,11 @@ h4 {
     text-align: center;
     font-family: papyrus, fantasy;
     font-size: 50px;
-    font-weight: bold;
     color: #FFF;   
 }
 h5 {
     font-family: papyrus, fantasy;
     font-size: 25px;
-    font-weight: bold;
     color: #FFF;  
 }
 th {
@@ -115,8 +115,7 @@ table {
     font-family: papyrus, fantasy; 
     font-size: 20px;
     color: #FFF;
-    font-weight: bold;
-    background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2));
+    background: linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4));
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
