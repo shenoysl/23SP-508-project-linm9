@@ -92,8 +92,6 @@ cursor: pointer;
 					<button type="submit" name = "submit" class="log-in">Log in</button>
 					<b> OR </b>
 					<a href = "signup" type = "signup" class = "signup">Sign Up</a></div><br/>
-					<p>admin login: test@vcu.edu  $2y$10$gAzOiUvdit7B6t01FKz76OP3fMcoO9FoTiR7DvY5s68K9U6A.v4I2</p>
-					<p>user login: user@vcu.edu  $2y$10$vSxuCA./tmpYxubuITXC/OG.o2JI5NfHOhl1jS/Oh5n9DftV00Uf.</p>
 				</div>
 			</div>
 		</form>
