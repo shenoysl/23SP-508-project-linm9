@@ -26,7 +26,7 @@ h4 {
     font-size: 30px;
     display: inline-block;
     color: #FFF;
-    background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2));
+    background: linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4));
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -44,7 +44,8 @@ h4 {
     left: 150%;
     width: 300px;
     position: absolute;
-    box-shadow: 0 1px 20px 0 rgba(69,90,100,0.8)
+    box-shadow: 0 1px 20px 0 rgba(69,90,100,0.8);
+    background: linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4));
 }
 .goBack a {
     color: #0d0a02;
