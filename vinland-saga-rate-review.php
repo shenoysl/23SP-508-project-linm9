@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Naruto Rate/Review</title>
+<title>Vinland Saga Rate/Review</title>
 <?php require_once('header.php'); ?>
 </head>
 <?php 
@@ -127,6 +127,9 @@ cursor: pointer;
 }
 
 .goBack {
+    position: absolute;
+    top: 5%;
+    left: 1%;
     color: #0d0a02;
     cursor: pointer;
     color: #000;
